@@ -167,80 +167,90 @@ const CreateProgram = () => {
   return (
     <form>
       {/*data && <>{data}</>*/}
-      <label className='form-label' htmlFor='program-name'>Program name</label>
-      <input type='text' className='form-control form-control-lg' name='program-name'></input>
+      <div className='group'>
+        <label className='form-label' htmlFor='program-name'>Program name</label>
+        <input type='text' id='program-name' className='form-control form-control-lg' name='program-name'></input>
+      </div>
 
-      <div>
-        <button type='button' className='btn btn-primary' onClick={handleAddBlock}>Add new block</button>
+      <div className='block'>
+        <button type='button' className='btn btn-outline-primary' onClick={handleAddBlock}>Add new block</button>
       </div>
 
       <ul>
         {program.map((block, i) => <li key={`block-${i}`}>
-          <div class='input-group' role='group'>
-            <input className='form-control' defaultValue={`Block ${i + 1}`} value={block.name} onInput={(e) => handleNameBlock(e, i)}></input>
-            <button type='button' className='btn btn-primary' onClick={() => handleAddBlockCopy(i)}>Add copy</button>
+          <hr className='hr-1'/>
+
+          <div className='input-group block' role='group'>
+            <input className='form-control block-name' value={block.name} onInput={(e) => handleNameBlock(e, i)}></input>
+            <button type='button' className='btn btn-outline-primary' onClick={() => handleAddBlockCopy(i)}>Add copy</button>
             {program.length > 1 && 
-              <button type='button' className='btn btn-primary' onClick={() => handleRemoveBlock(i)}>Remove block</button>}
+              <button type='button' className='btn btn-outline-danger' onClick={() => handleRemoveBlock(i)}>Remove block</button>}
           </div>
 
-          <div>
-            <button type='button' className='btn btn-primary' onClick={() => handleAddWeek(i)}>Add new week</button>
+          <div className='group'>
+            <button type='button' className='btn btn-outline-primary' onClick={() => handleAddWeek(i)}>Add new week</button>
           </div>
 
           <ul>
             {block.weeks.map((week, j) => <li key={`week-${i}-${j}`}> 
-              <span className='text'>Week {j + 1} </span>
+              <hr className='hr-2'/>
 
-              <div class='btn-group' role='group'>
-                <button type='button' className='btn btn-primary' onClick={() => handleAddWeekCopy(i, j)}>Add copy</button>
+              <span className='week-text'>Week {j + 1} </span>
+
+              <div className='btn-group' role='group'>
+                <button type='button' className='btn btn-outline-primary' onClick={() => handleAddWeekCopy(i, j)}>Add copy</button>
                 {block.weeks.length > 1 && 
-                  <button type='button' className='btn btn-primary' onClick={() => handleRemoveWeek(i, j)}>Remove week</button>}
+                  <button type='button' className='btn btn-outline-danger' onClick={() => handleRemoveWeek(i, j)}>Remove week</button>}
               </div>
 
-              <div>
-                <button type='button' className='btn btn-primary' onClick={() => handleAddDay(i, j)}>Add new day</button>
+              <div className='group'>
+                <button type='button' className='btn btn-outline-primary' onClick={() => handleAddDay(i, j)}>Add new day</button>
               </div>
 
               <ul>
                 {week.days.map((day, k) => <li key={`day-${i}-${j}-${k}`}>
-                  <span className='text'>Day {k + 1} </span>
+                  <hr className='hr-3'/>
 
-                  <div class='btn-group' role='group'>
-                    <button type='button' className='btn btn-primary' onClick={() => handleAddDayCopy(i, j, k)}>Add copy</button>
+                  <span className='day-text'>Day {k + 1} </span>
+
+                  <div className='btn-group' role='group'>
+                    <button type='button' className='btn btn-outline-primary' onClick={() => handleAddDayCopy(i, j, k)}>Add copy</button>
                     {week.days.length > 1 &&
-                      <button type='button' className='btn btn-primary' onClick={() => handleRemoveDay(i, j, k)}>Remove day</button>}
+                      <button type='button' className='btn btn-outline-danger' onClick={() => handleRemoveDay(i, j, k)}>Remove day</button>}
                   </div>
 
                   <div className='input-group'>
                     <input className='form-control' value={day.nextExerciseName} onInput={(e) => handleNameNewExercise(e, i, j, k)}></input>
-                    <button type='button' className='btn btn-primary' onClick={() => handleAddExercise(i, j, k)}>Add new exercise</button>
+                    <button type='button' className='btn btn-outline-primary' onClick={() => handleAddExercise(i, j, k)}>Add exercise</button>
                   </div>
 
-                  <ul>
-                    {day.exercises.map((exercise, l) => <li key={`exercise-${i}-${j}-${k}-${l}`}>
+                  {day.exercises.length > 0 && <ul>
+                    {day.exercises.map((exercise, l) => <li key={`exercise-${i}-${j}-${k}-${l}`} className='border'>
+                      <hr className='hr-4'/>
+                      
                       <div className='input-group'>
                         <input className='form-control' value={exercise.name} onInput={(e) => handleNameExercise(e, i, j, k, l)}></input>
-                        <button type='button' className='btn btn-primary' onClick={() => handleRemoveExercise(i, j, k, l)}>Remove exercise</button>
+                        <button type='button' className='btn btn-outline-danger' onClick={() => handleRemoveExercise(i, j, k, l)}>Remove exercise</button>
                       </div>
 
                       <div className='input-group'>
                         <input type='number' className='form-control' min='0' value={exercise.nextReps} onChange={(e) => handleNewSetReps(e, i, j, k, l)}></input>
                         <span className='input-group-text'>reps</span>
-                        <button type='button' className='btn btn-primary' onClick={() => handleAddSet(i, j, k, l)}>Add set</button>
+                        <button type='button' className='btn btn-outline-primary' onClick={() => handleAddSet(i, j, k, l)}>Add set</button>
                       </div>
 
                       <ul>
-                        {exercise.sets.map((set, m) => <li key={`set-${i}-${j}-${k}-${l}-${m}`}>
+                        {exercise.sets.map((set, m) => <li key={`set-${i}-${j}-${k}-${l}-${m}`}>                          
                           <div className='input-group'>
-                            <span className='input-group-text'>Set {m + 1}: </span>
+                            <span className='input-group-text'>Set {m + 1}:</span>
                             <input type='number' className='form-control' min='0' value={set} onInput={(e) => handleChangeSet(e, i, j, k, l, m)}></input>
                             <span className='input-group-text'>reps</span>
-                            <button type='button' className='btn btn-primary' onClick={() => handleRemoveSet(i, j, k, l, m)}>Remove set</button>
+                            <button type='button' className='btn btn-outline-danger' onClick={() => handleRemoveSet(i, j, k, l, m)}>Remove set</button>
                           </div>
                         </li>)}
                       </ul>
                     </li>)}
-                  </ul>
+                  </ul>}
                 </li>)}
               </ul>
             </li>)}
@@ -248,7 +258,7 @@ const CreateProgram = () => {
         </li>)}
       </ul>
 
-      <div>
+      <div className='group'>
         <button type="submit" className='btn btn-primary'>Save Program</button>
       </div>
     </form>

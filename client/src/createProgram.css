@@ -6,7 +6,6 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  /* border: 1px solid black; */
 }
 
 li {
@@ -14,13 +13,67 @@ li {
   padding: 0;
 }
 
-.text {
-  align-self: center;
+#program-name {
+  font-weight: 800;
 }
 
-/* Not perfect */
-.btn-group, .input-group {
+.week-text {
+  align-self: center;
+  font-weight: 600;
+}
+
+.day-text {
+  align-self: center;
+  font-weight: 500;
+}
+
+.btn-group, .input-group, .group {
   margin: 10px 0px;
 }
 
+.block-name {
+  font-weight: 700;
+}
+
+.block {
+  margin: 20px 0px;
+}
+
+hr {
+  opacity: 100%;
+}
+
+.hr-1 {
+  border-top: 7px solid blueviolet;
+}
+
+.hr-2 {
+  border-top: 5px solid blue;
+}
+
+.hr-3 {
+  border-top: 3px solid green;
+}
+
+.hr-4 {
+  border-top: 2px solid orange;
+}
+
+@media only screen and (min-width: 600px) {
+  form {
+    grid-column: 3 / -3;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  form {
+    grid-column: 4 / -4;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  form {
+    grid-column: 5 / -5;
+  }
+}
 
